@@ -1,0 +1,152 @@
+{% extends 'core/base.html.twig' %}
+{% block title %}
+	Panier
+{% endblock %}
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-9">
+				<h3>Votre panier</h3>
+				{% for flash in app.flashes('panier') %}
+                            <div class="alert {{ flash.color }}">{{ flash.content }}</div>
+                        {% endfor %}
+				{% if panier.achats |length > 0 %}
+
+					<table class="table text-center table-bordered align-middle" style="font-size:20px;">
+						<thead>
+							<tr class="table-dark text-center">
+								<th scope="col">Produit</th>
+								<th scope="col" style="width:260px;">Nom</th>
+								<th scope="col">Prix Unitaire</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Total</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						
+						<form action="{{ path('panier_update') }}" method="POST">
+						{% for key, achat in panier.achats  %}
+						<tbody>
+							<tr>
+								<th><img src="{{ asset_if(achat.produit.imagePath, 'images/produits/sansphoto.png') }}" class="center" alt="Problème d'affichage" style="height:90px;width:100px;"></th>
+								<td>{{achat.produit.nom}}</td>
+								<td>{{achat.prixAchat|number_format(2)}} $</td>
+								<td><input type="number" name="{{ 'inputQuantite[' ~ key ~ ']' }}" value="{{achat.quantite}}" style="width:50px;text-align:center;"></input></td>
+								<td>{{achat.calculerTotal|number_format(2)}} $</td>
+								<td>
+									
+										<a href="{{ path('panier_supprimer', { idProduit: achat.produit.idProduit }) }}" class="text-danger">
+			<i class="fa-solid fa-trash"></i>
+		</a>
+								</td>
+							</tr>
+						</tbody>
+
+						{% endfor %}
+
+					</table>
+					<div style="display:flex;justify-content:space-evenly;">
+						<button name="action" value="rafraichir" type="submit" class="btn btn-dark btn-lg">
+							<i class="fa-solid fa-arrows-rotate"></i>
+							Mettre à jour</button>
+						<button name="action" value="vider" type="sumbit" class="btn btn-danger btn-lg">
+							<i class="fa-solid fa-trash"></i>
+							Vider le panier</button>
+					</div>				
+					</form>
+
+				{% else %}
+
+					<h3>Aucun produit dans le panier</h3>
+
+				{% endif %}
+
+			</div>
+			{# FIN DIV COL 9 #}
+
+			<div class="col-3 card text-white bg-dark mb-3 h-100">
+				<div class="card-body">
+					<div class="card-header border-light text-center">
+						<h2>Sommaire</h2>
+					</div>
+
+					<div
+						style="font-size:20px;">
+
+						{# PREMIERE ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>Sous total</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+								<span>
+									{{panier.calculerSousTotal|number_format(2)}} $
+								</span>
+							</div>
+						</div>
+
+						{# DEUXIEME ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>TPS ({{panier.getTPS * 100}}%)</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+								<span>
+									{{(panier.calculerSousTotalTPS)|number_format(2)}} $
+								</span>
+							</div>
+						</div>
+
+						{# TROISIEME ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>TVQ ({{panier.getTVQ * 100}}%)</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+								<span>
+									{{(panier.calculerSousTotalTVQ)|number_format(2)}} $
+								</span>
+							</div>
+						</div>
+
+						{# QUATRIEME ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>Frais livraison</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+									<span>
+										{{panier.getFraisLivraison|number_format(2)}}
+										$
+									</span>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+				<div class="card-footer bg-dark border-light text-center">
+						<a href="{{ path('app_resumer_commande') }}" class="btn btn-light btn-lg">
+						Commander | {{ (panier.caculerGrandTotal|number_format(2)) }} $
+					</a>
+				</div>		
+			</div>
+
+		</div>
+		{# FIN DIV ROW #}
+
+	</div>
+	{# FIN DIV CONTAINER #}
+
+{% endblock %}

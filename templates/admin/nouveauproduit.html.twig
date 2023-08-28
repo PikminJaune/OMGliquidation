@@ -1,0 +1,47 @@
+{% extends 'core/base.html.twig' %}
+{% form_theme nouveauProduitForm 'bootstrap_5_layout.html.twig' %}
+
+{% block content %}
+
+
+	<div class="d-flex justify-content-center">
+		<div class="col-6">
+			<h3>Ajout d'un produit</h3>
+
+
+			{{ form_start(nouveauProduitForm) }}
+			<div class="row">
+				<div>
+					{{ form_row(nouveauProduitForm.nom) }}
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-6">
+					{{ form_row(nouveauProduitForm.prix) }}
+				</div>
+				<div class="col-6">
+					{{ form_row(nouveauProduitForm.quantiteEnStock) }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					{{ form_row(nouveauProduitForm.categorie) }}
+				</div>
+				<div class="col-6">
+					{{ form_row(nouveauProduitForm.imagePath) }}
+				</div>
+			</div>
+			<div class="row">
+
+				{{ form_row(nouveauProduitForm.description) }}
+
+			</div>
+
+			<div class="d-flex justify-content-center mt-2">
+				{{ form_row(nouveauProduitForm.btnEnregistrer) }}
+			</div>
+			{{ form_end(nouveauProduitForm) }}
+
+
+		{% endblock %}

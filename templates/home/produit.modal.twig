@@ -1,0 +1,24 @@
+<div class="modal-header">
+	<h5 class="modal-title">{{produit.nom}}</h5>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+	<article class="row">
+		<div class="col-4">
+			<img src="{{ asset_if(produit.imagePath, 'images/produits/sansphoto.png') }}" class="center" alt="Problème d'affichage" style="height:150px;width:150px;">
+			<h3 style="text-align:center">{{produit.prix}}$</h3>
+			<h3 style="text-align:center">{{produit.categorie.categorie}}</h3>
+
+		</div>
+
+		<div class="col-8">
+		<h2>Description</h2>
+			<p>{{produit.description}}</p>
+		</div>
+	</article>
+</div>
+<div class="modal-footer">
+	<h4>Quantité en stock :
+		{{produit.quantiteEnStock}}</h4>
+	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+</div>

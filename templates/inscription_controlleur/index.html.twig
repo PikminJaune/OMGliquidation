@@ -1,0 +1,79 @@
+{% extends 'core/base.html.twig' %}
+{% form_theme inscriptionForm 'bootstrap_5_layout.html.twig' %}
+{% block title %}
+	Inscription
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-lg-5 mx-auto">
+			<div class="text-center">
+				<h1 class="">Création d'un compte</h1>
+				<h5>Vous possedez un compte ? Connectez-vous
+					<a href="{{ path('app_connexion') }}">
+						<i class="fa-solid fa-arrow-up-right-from-square fa-beat"></i>
+					</a>
+				</h5>
+			</div>
+			{# TODO : CHANGER LE NOM DU FLASH #}
+			{% for flash in app.flashes('register')%}
+				<div class="alert my-3 {{ flash.color }}">{{ flash.content }}</div>
+			{% endfor %}
+			{{ form_start(inscriptionForm, {'attr': {'class': 'besoin-validation-inscription', 'novalidate': 'novalidate' }}) }}
+			<div class="row">
+				<div>
+					{{ form_row(inscriptionForm.courriel) }}
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-6">
+					{{ form_row(inscriptionForm.nom) }}
+				</div>
+				<div class="col-6">
+					{{ form_row(inscriptionForm.prenom) }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					{{ form_row(inscriptionForm.password.first) }}
+				</div>
+				<div class="col-6">
+					{{ form_row(inscriptionForm.password.second) }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6">
+					{{ form_row(inscriptionForm.ville) }}
+				</div>
+				<div class="col-6">
+					{{ form_row(inscriptionForm.adresse) }}
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col-6">
+					{{ form_row(inscriptionForm.telephone, {'attr': {'class': 'txtTelephone'}}) }}
+				</div>
+
+				<div class="col-2">
+					{{ form_row(inscriptionForm.codePostal, {'attr': {'class': 'txtCodePostal'}}) }}
+				</div>
+
+				<div class="col-4">
+					{{ form_row(inscriptionForm.province) }}
+				</div>
+
+			</div>
+			<div class="d-flex justify-content-center mt-4">
+				{{ form_row(inscriptionForm.creer) }}
+			</div>
+			{{ form_end(inscriptionForm) }}
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script defer src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.16/dist/jquery.mask.min.js"></script>
+	<script defer src="{{ asset('scripts/inscription.js')}}"></script>
+{% endblock %}

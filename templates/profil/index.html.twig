@@ -1,0 +1,118 @@
+{% extends 'core/base.html.twig' %}
+{% form_theme modificationForm 'bootstrap_5_layout.html.twig' %}
+{% form_theme modificationMdpForm 'bootstrap_5_layout.html.twig' %}
+{% block content %}
+	<div class="container">
+		<h1 class="text-center">Profil</h1>
+		<hr>
+		{% for flash in app.flashes('profil') %}
+			<div class="alert {{ flash.color }}">{{ flash.content }}</div>
+		{% endfor %}
+		<div class="row">
+			<div class="col-6">
+				<h3>Informations</h3>
+
+
+				{{ form_start(modificationForm, {'attr': {'class': 'besoin-validation-inscription', 'novalidate': 'novalidate' }}) }}
+				<div class="row">
+					<div>
+						{{ form_row(modificationForm.courriel) }}
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(modificationForm.nom) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(modificationForm.prenom) }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						{{ form_row(modificationForm.ville) }}
+					</div>
+					<div class="col-6">
+						{{ form_row(modificationForm.adresse) }}
+					</div>
+				</div>
+				<div class="row">
+
+					<div class="col-6">
+						{{ form_row(modificationForm.telephone, {'attr': {'class': 'txtTelephone'}}) }}
+					</div>
+
+					<div class="col-2">
+						{{ form_row(modificationForm.codePostal, {'attr': {'class': 'txtCodePostal'}}) }}
+					</div>
+
+					<div class="col-4">
+						{{ form_row(modificationForm.province) }}
+					</div>
+
+				</div>
+
+				<div class="d-flex justify-content-center mt-2">
+					{{ form_row(modificationForm.modifier) }}
+				</div>
+				{{ form_end(modificationForm) }}
+
+				<div class="col-6"></div>
+				{{ form_start(modificationMdpForm, {'attr': {'class': 'besoin-validation-inscription', 'novalidate': 'novalidate' }}) }}
+				<div class="row">
+					<div>
+						{{ form_row(modificationMdpForm.MotDePasseActuel) }}
+					</div>
+					<div>
+						{{ form_row(modificationMdpForm.password) }}
+					</div>
+				</div>
+				<div class="d-flex justify-content-center mt-2">
+					{{ form_row(modificationMdpForm.modifier) }}
+				</div>
+				{{ form_end(modificationMdpForm) }}
+
+			</div>
+			<div class="col-6">
+				<h3 class="mb-5">Commande(s)</h3>
+				{% if currentUser.listeCommande | length > 0 %}
+				<div class="row">
+					<table class="table text-center table-bordered align-middle">
+						<thead>
+							<tr class="table-primary text-center">
+								<th scope="col"># Commande</th>
+								<th scope="col">Date</th>
+								<th scope="col">Total</th>
+								<th scope="col">Status</th>
+								<th scope="col">Détails</th>
+							</tr>
+						</thead>
+						{% for commande in currentUser.listeCommande %}
+							<tbody>
+								<tr>
+									<th>{{commande.idCommande}}</th>
+									<td>{{commande.dateCommandeFormat()}}</td>
+									<td>{{commande.caculerGrandTotal() |number_format(2) }} $</td>
+									<td>{{commande.etat}}</td>
+									<td>
+										<a href="{{ path('app_profil_commande_id', { idCommande: commande.idCommande }) }}">
+											<i class="fa-regular fa-eye fa-fade"></i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						{% endfor %}
+					</table>
+				</div>
+			{% else %}
+			<h1>Vous n'avez aucune commande</h1>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}

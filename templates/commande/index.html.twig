@@ -1,0 +1,40 @@
+{% extends 'core/base.html.twig' %}
+{% block content %}
+	<div class="container">
+		<div>
+			<h3 class="mb-5">Commande(s)</h3>
+			{% if currentUser.listeCommande | length > 0 %}
+			<div class="row">
+				<table class="table text-center table-bordered align-middle">
+					<thead>
+						<tr class="table-primary text-center">
+							<th scope="col"># Commande</th>
+							<th scope="col">Date</th>
+							<th scope="col">Total</th>
+							<th scope="col">Status</th>
+							<th scope="col">Détails</th>
+						</tr>
+					</thead>
+					{% for commande in currentUser.listeCommande %}
+						<tbody>
+							<tr>
+								<th>{{commande.idCommande}}</th>
+								<td>{{commande.dateCommandeFormat()}}</td>
+								<td>{{commande.caculerGrandTotal() |number_format(2) }} $</td>
+								<td>{{commande.etat}}</td>
+								<td>
+									<a href="{{ path('app_profil_commande_id', { idCommande: commande.idCommande }) }}">
+										<i class="fa-regular fa-eye fa-fade"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					{% endfor %}
+				</table>
+			</div>
+			{% else %}
+			<h1>Vous n'avez aucune commande</h1>
+			{% endif %}
+		</div>
+	</div>
+</div>{% endblock %}{% block stylesheets %}{% endblock %}{% block javascripts %}{% endblock %}

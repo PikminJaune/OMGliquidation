@@ -1,0 +1,105 @@
+<!-- Navbar -->
+<nav
+	class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+	<!-- Container wrapper -->
+	<div
+		class="container">
+		<!-- Navbar brand -->
+		<a class="navbar-brand me-2" href="{{ path('app_catalogue') }}">
+			<img src="{{ asset_if('images/logomg.png', 'images/produits/sansphoto.png') }}" height="70" alt="LOGO OMG" loading="lazy" style="margin-top: -1px;"/>
+		</a>
+
+		<!-- Toggle button -->
+		<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+		</button>
+
+		<!-- Collapsible wrapper -->
+		<div
+			class="collapse navbar-collapse" id="navbarButtonsExample" style="font-size:25px">
+			<!-- Left links -->
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item ">
+					<a class="nav-link text-white" aria-current="page" href="{{ path('app_catalogue') }}">Accueil</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{{ path('app_page') }}">Contact</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="{{ path('app_panier') }}">Panier</a>
+				</li>
+				{% if is_granted("ROLE_ADMIN") %}
+					{# DEBUT DE LA DIV POUR LE DROP DOWN Administration #}
+					<div class="dropdown" style="font-size:25px">
+						<a class="nav-link dropdown-toggle text-white" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+							Administration
+						</a>
+
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_categories') }}">Catégories</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_nouveauproduit') }}">Nouveau Produit</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_produits') }}">Produits</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_admin_commandes') }}">Commandes</a>
+							</li>
+						</ul>
+					</div>
+				{% endif %}
+			</ul>
+
+			<form class="d-flex" method="POST" action="{{ app.request.uri }}">
+				<input name="search_field" class="form-control" type="search" placeholder="Wi-Fi,Laveuse, ..." aria-label="Search">
+				<button class="btn btn-outline-dark btn-light mx-2" type="submit">
+					<i class="fa-solid fa-magnifying-glass"></i>
+				</button>
+			</form>
+			<!-- Left links -->
+
+			<div class="d-flex align-items-center">
+
+				{% if app.getUser() == null  %}
+					<a class="btn btn-light me-2 mx-5" href="{{path('app_connexion')}}">Connexion</a>
+					<a class="btn btn-dark me-3" href="{{path('app_inscription')}}">S'inscrire</a>
+					<a class="btn btn-dark px-3" href="https://github.com/1847622" role="button">
+						<i class="fab fa-github"></i>
+					{% else %}
+						<img src="https://ui-avatars.com/api/?name={{ app.user.prenom }}+{{ app.user.nom }}&rounded=true&background=random&length=3" alt="" class="mx-2">
+						<p class="text-white mx-2">Bonjour
+							{{app.user.prenom}}<br>
+							<a class="text-white" href="{{path('app_deconnexion')}}">Se deconnecter</a>
+						</p>
+						<div class="dropdown">
+							<button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								{{app.user.prenom}}
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="{{path('app_profil')}}">Profil</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{path('app_profil_commandes')}}">Mes commandes</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{path('app_panier')}}">Panier</a>
+								</li>
+								<div class="dropdown-divider"></div>
+								<li>
+									<a class="dropdown-item" href="{{path('app_deconnexion')}}">Deconnexion</a>
+								</li>
+							</ul>
+						</div>
+					{% endif %}
+				</a>
+			</div>
+		</div>
+		<!-- Collapsible wrapper -->
+	</div>
+	<!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

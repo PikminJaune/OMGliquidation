@@ -1,0 +1,137 @@
+{% extends 'core/base.html.twig' %}
+{% block title %}
+	Resumé commande
+{% endblock %}
+{% block content %}
+	<div class="container">
+	<h3>Resumer de votre commande</h3>
+
+	<div class="row my-2">
+	
+<div class="card">
+<div class="card-header">
+<h4>Adresse de livraison</h4>
+</div>
+  <div class="card-body">
+  	<h5>{{app.user.adresse}}</h5>
+	<h5>{{app.user.ville}}</h5>
+	<h5>{{app.user.codePostal}}</h5>
+  </div>
+</div>
+
+
+	</div>
+		<div class="row">
+			<div class="col-9">
+					<table class="table text-center table-bordered align-middle" style="font-size:20px;">
+						<thead>
+							<tr class="table-dark text-center">
+								<th scope="col">Produit</th>
+								<th scope="col" style="width:260px;">Nom</th>
+								<th scope="col">Prix Unitaire</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+						
+						{% for key, achat in panier.achats  %}
+						<tbody>
+							<tr>
+								<th><img src="{{ asset_if(achat.produit.imagePath, 'images/produits/sansphoto.png') }}" class="center" alt="Problème d'affichage" style="height:90px;width:100px;"></th>
+								<td>{{achat.produit.nom}}</td>
+								<td>{{achat.prixAchat|number_format(2)}} $</td>
+								<td>{{achat.quantite}}</td>
+								<td>{{achat.calculerTotal|number_format(2)}} $</td>
+							</tr>
+						</tbody>
+
+						{% endfor %}
+					</table>									
+
+			</div>
+			{# FIN DIV COL 9 #}
+
+			<div class="col-3 card text-white bg-dark mb-3 h-100">
+				<div class="card-body">
+					<div class="card-header border-light text-center">
+						<h2>Sommaire</h2>
+					</div>
+
+					<div
+						style="font-size:20px;">
+
+						{# PREMIERE ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>Sous total</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+								<span>
+									{{panier.calculerSousTotal|number_format(2)}} $
+								</span>
+							</div>
+						</div>
+
+						{# DEUXIEME ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>TPS ({{panier.getTPS * 100}}%)</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+								<span>
+									{{(panier.calculerSousTotalTPS)|number_format(2)}} $
+								</span>
+							</div>
+						</div>
+
+						{# TROISIEME ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>TVQ ({{panier.getTVQ * 100}}%)</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+								<span>
+									{{(panier.calculerSousTotalTVQ)|number_format(2)}} $
+								</span>
+							</div>
+						</div>
+
+						{# QUATRIEME ROW #}
+						<div class="row">
+
+							<div class="col">
+								<span>Frais livraison</span>
+							</div>
+
+							<div class="col" style="text-align:right;">
+									<span>
+										{{panier.getFraisLivraison|number_format(2)}}
+										$
+									</span>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+				<div class="card-footer bg-dark border-light text-center">
+						<a href="{{ path('stripe_checkout') }}" class="btn btn-light btn-lg">
+						Commander | {{ (panier.caculerGrandTotal|number_format(2)) }} $
+					</a>
+				</div>		
+			</div>
+
+		</div>
+		{# FIN DIV ROW #}
+
+	</div>
+	{# FIN DIV CONTAINER #}
+
+{% endblock %}

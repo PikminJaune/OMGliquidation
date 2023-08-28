@@ -1,0 +1,87 @@
+{% extends 'core/base.html.twig' %}
+{% block title %}
+	Produits
+{% endblock %}
+{% block content %}
+
+	<div class="row">
+
+		<div class="col-2">
+			{# 0.1 #}
+			{# Afficher les catégories #}
+				<h1 style="text-align:center;"> Catégories</h1>
+			<ul class="border border-danger rounded">
+				<li style="padding-bottom:20px;">
+					<a href="{{ path('app_catalogue') }}">Toutes</a>
+				</li>
+				{% for cat in categories %}
+					<li style="padding-bottom:20px;">
+						<a href="{{ path('app_catalogue', { cat:cat.idCategorie }) }}">{{ cat.categorie }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+
+		</div>
+		{# FERMER 0.1 #}
+
+		<article class="col-10">
+
+			<div class="row">
+				{% if produits|length > 0 %}
+					{% for produit in produits %}
+
+						<div
+							class="card text-white bg-white mb-3 col-3 mx-1 shadow p-3" style="width:300px;">
+							{# 1 #}
+
+							<div class="mt-3">
+								<a class="produit-modal" href="{{ path('produit_modal', { idProduit: produit.idProduit })}}">
+									<h4 style="text-align:center;height:100px;" class="text-dark">{{ produit.nom }}</h4>
+								</a>
+							</div>
+
+							<div
+								class="card-body">
+								{# 2 #}
+								<a class="produit-modal" href="{{ path('produit_modal', { idProduit: produit.idProduit })}}">
+									<img src="{{ asset_if(produit.imagePath, 'images/produits/sansphoto.png') }}" class="center" alt="Problème d'affichage" style="height:200px;">
+								</a>
+								<h5 class="card-text my-2 text-dark" style="text-align:center">{{ produit.prix }}$</h5>
+								{% if produit.quantiteEnStock > 0 %}
+									<h5 class="text-success">• En Stock ({{produit.quantiteEnStock}})</h5>
+									<div class="row card-footer bg-transparent border-dark">
+
+										<form method="POST" action="{{ path('panier_add', {idProduit:produit.idProduit}) }}">
+											<button type="submit" class="btn btn btn-outline-dark" style="font-size:20px">Ajouter au panier
+											</button>
+										</form>
+
+									</div>
+								{% else %}
+									<h5 class="text-danger">Rupture de Stock</h5>
+									<div class="row card-footer bg-transparent border-dark">
+										<button type="button" class="btn btn btn-outline-dark disabled" style="font-size:20px">NON DISPONIBLE</button>
+									</div>
+								{% endif %}
+							</div>
+							{# FERMETURE DE LA DIV CARD-BODY LA 2  #}
+
+						</div>
+						{# FERMETURE DE LA DIV CARD LA 1 #}
+					{% endfor %}
+				{% else %}
+					<h1>Aucun produits dans cette catégorie.</h1>
+				{% endif %}
+			</div>
+		</article>
+	</div>
+</div>
+{# FERMTURE DE LA DIV ROW LA 0  #}
+
+
+<div class="modal fade" tabindex="-1" id="produit-modal">
+	<div class="modal-dialog modal-xl">
+		<div id="produit-modal-content" class="modal-content"></div>
+	</div>
+</div>{% endblock %}{% block javascripts %}
+<script src="{{ asset('scripts/modal.produit.js') }}"></script>{% endblock %}

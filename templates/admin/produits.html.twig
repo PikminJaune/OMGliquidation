@@ -1,0 +1,46 @@
+{% extends 'core/base.html.twig' %}
+{% block content %}
+	<h1 class="row justify-content-center mb-4">Touts les produits</h1>
+	<div class="col-8 mx-auto">
+
+		{% if toutsProduits |length > 0 %}
+
+			<table class="table text-center table-bordered align-middle" style="font-size:20px;">
+				<thead>
+					<tr class="table-dark text-center">
+						<th scope="col"># Produit</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Catégorie</th>
+						<th scope="col">Détails</th>
+					</tr>
+				</thead>
+
+				{% for produit in toutsProduits %}
+					<tbody>
+						<tr>
+							<td>{{produit.idProduit}}</td>
+							<td>{{produit.nom}}</td>
+							<td>{{produit.categorie.categorie}}</td>
+							<td>
+								<a href="{{ path('app_admin_modif_produit', { idProduit: produit.idProduit }) }}">
+									<i class="fa-regular fa-eye fa-fade"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				{% endfor %}
+			</table>
+		{% else %}
+			<h3>Aucune produit</h3>
+		{% endif %}
+		<div class="row justify-content-center">
+			<div class="col-4">
+				<a href="{{path('app_admin_nouveauproduit')}}">
+					<button type="button" class="btn btn-primary my-3 mx-3" style="font-size:20px">
+						Ajouter un produit</button>
+				</a>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

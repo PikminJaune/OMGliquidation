@@ -1,0 +1,133 @@
+{# <footer class="footer mt-auto py-3 bg-light">
+	<div class="container">
+		<section class="row py-3">
+			<div class="col-4">
+				<h1>OMG Liquidation</h1>
+			</div>
+
+			<div class="col-4" style="border-left: 3px solid black;text-align:center;">
+				<h1 class="py-3">Nous rejoindre</h1>
+				<a class="btn btn-dark btn-lg" href="{{ path('app_page') }}" role="button" aria-pressed="true">Contactez-nous</a>
+			</div>
+
+			<div class="col-4" style="border-left: 3px solid black;text-align:center;">
+				<h1>Site Pédagogique</h1>
+				<p>Ce site est créé à des fins pédagogiques.Aucun produit ne sera vendu.</p>
+			</div>
+		</section>
+		<section class="row py-2">
+			<h3 style="text-align:center;">Créé par Olivier Mathieu-Grégoire</h3>
+
+		</section>
+	</div>
+</footer> #}
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="mt-5">
+  <!-- Footer -->
+  <footer class="text-center text-white" style="background-color: #3f51b5">
+    <!-- Grid container -->
+    <div class="container">
+      <!-- Section: Links -->
+      <section class="mt-5">
+        <!-- Grid row-->
+        <div class="row text-center d-flex justify-content-center pt-5">
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="text-white">À propros</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="{{path('app_catalogue')}}" class="text-white">Produits</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="{{path('app_panier')}}" class="text-white">Panier</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+            {% if app.getUser() == null  %}
+              <a href="{{path('app_connexion')}}" class="text-white">Connexion</a>
+              {% else %}
+              <a href="{{path('app_deconnexion')}}" class="text-white">Deconnexion</a>
+              {% endif %}
+            </h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2">
+            <h6 class="text-uppercase font-weight-bold">
+              <a href="{{path('app_page')}}" class="text-white">Contact</a>
+            </h6>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row-->
+      </section>
+      <!-- Section: Links -->
+
+      <hr class="my-5" />
+
+      <!-- Section: Text -->
+      <section class="mb-5">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <p>
+              Bonjour à toi cher visiteur. Prend note que ce site n'est qu'un devoir dans un cours de PHP au cégep de Saint-Jérôme. Donc tout les produits sur le site 
+			  ne sont pas en ventes , ce n'est qu'une démonstration pour montrer mes talents.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Section: Text -->
+
+      <!-- Section: Social -->
+      <section class="text-center mb-5">
+        <a href="" class="text-white me-4">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="text-white me-4">
+          <i class="fab fa-github"></i>
+        </a>
+      </section>
+      <!-- Section: Social -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div
+         class="text-center p-3"
+         style="background-color: rgba(0, 0, 0, 0.2)"
+         >
+      © 2023 Copyright : Olivier Mathieu-Grégoire
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</div>
+<!-- End of .container -->

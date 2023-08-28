@@ -1,0 +1,162 @@
+{% extends 'core/base.html.twig' %}
+{% form_theme formModifEtat 'bootstrap_5_layout.html.twig' %}
+{% block content %}
+	<div class="container">
+		<div>
+			<h3 class="mb-5">Détails de la commande #
+				{{commande.idCommande}}</h3>
+
+			{% if is_granted("ROLE_ADMIN") %}
+				{{ form_start(formModifEtat) }}
+				<div class="col-4">
+					{{ form_row(formModifEtat.etat) }}
+				</div>
+				{{ form_end(formModifEtat) }}
+			{% endif %}
+
+			<div class="row">
+				<div class="col-5 card">
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4># Commande</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								{{commande.idCommande}}
+							</h4>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4>Date de commande</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								{{commande.getDateCommandeFormat()}}
+							</h4>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4>Date de livraison</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								À venir.
+							</h4>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4>État</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								{{commande.etat}}
+							</h4>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-4 card mx-4">
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4>Sous-Total</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								{{(commande.calculerSousTotal())|number_format(2)}}
+								$
+							</h4>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4>Frais de livaison</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								{{commande.fraisLivraison |number_format(2)}}
+								$
+							</h4>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4>Total</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								{{(commande.caculerGrandTotal())|number_format(2)}}
+								$
+							</h4>
+						</div>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col">
+							<h4>Nombre articles</h4>
+						</div>
+						<div class="col" style="text-align:right;">
+							<h4>
+								{{commande.getQuantiteTotal()}}
+								article(s)
+							</h4>
+						</div>
+					</div>
+				</div>
+				<div class="col-2 card">
+					<div class="row mb-3">
+						<h4>Adresse</h4>
+						<div class="col">
+							<h5>{{commande.client.adresse}}</h5>
+							<h5>{{commande.client.ville}}</h5>
+							<h5>{{commande.client.codePostal}}</h5>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="row mt-4">
+					<table class="table text-center table-bordered align-middle" style="font-size:20px;">
+						<thead>
+							<tr class="table-primary text-center">
+								<th scope="col">Produit</th>
+								<th scope="col" style="width:260px;">Nom</th>
+								<th scope="col">Prix Unitaire</th>
+								<th scope="col">Quantité</th>
+								<th scope="col">Total</th>
+							</tr>
+						</thead>
+
+						{% for key, achat in commande.listeAchat  %}
+							<tbody>
+								<tr>
+									<th><img src="{{ asset_if(achat.produit.imagePath, 'images/produits/sansphoto.png') }}" class="center" alt="Problème d'affichage" style="height:90px;width:100px;"></th>
+									<td>{{achat.produit.nom}}</td>
+									<td>{{achat.prixAchat|number_format(2)}}
+										$</td>
+									<td>{{achat.quantite}}</td>
+									<td>{{achat.calculerTotal|number_format(2)}}
+										$</td>
+								</tr>
+							</tbody>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script defer src="{{ asset('scripts/changementEtatCommande.js') }}"></script>
+{% endblock %}
