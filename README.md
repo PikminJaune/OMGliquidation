@@ -60,9 +60,15 @@ Les admins ont plusieurs fonctions :
 - Voir la liste de produits.
 - Voir toutes les commandes effectuées.
 
-Une double vérification est faite.Si aucune image n'est choisie , il y en aura une par défaut.
+Une double vérification est faite. Si aucune image n'est choisie , il y en aura une par défaut.
 ![ajoutProduit](https://github.com/PikminJaune/OMGliquidation/assets/71794298/5cfcac72-186f-4e8a-9190-88cc81878eac)
-![modifierProduit](https://github.com/PikminJaune/OMGliquidation/assets/71794298/2f8f8494-cbe2-4dfe-abb2-013260fd490b)
-![adminModifCatégorie](https://github.com/PikminJaune/OMGliquidation/assets/71794298/1ac2f39b-bbf2-4844-94e6-5cb70f7bb7cd)
+Liste de tous les produits qui existe en BD pour le site. Si on clic sur l'oeil à droite une page de modification s'affiche.
 ![listeProduit](https://github.com/PikminJaune/OMGliquidation/assets/71794298/e743e14a-3c22-4774-83c8-1fc8cff3467d)
+Le formulaire est rempli automatiquement avec les informations du produit. Une fois les modifications faites , un clic sur "modifier" en bas et la sauvegarde se fait en BD.
+![modifierProduit](https://github.com/PikminJaune/OMGliquidation/assets/71794298/2f8f8494-cbe2-4dfe-abb2-013260fd490b)
+Un admin peu modifier un nom de catégorie et/ou ajouter une nouvelle catégorie.
+![adminModifCatégorie](https://github.com/PikminJaune/OMGliquidation/assets/71794298/1ac2f39b-bbf2-4844-94e6-5cb70f7bb7cd)
+En cliquant à droite sur l'oeil , l'admin voit le détail de la commande et peu modifier l'état de celle-ci. _voir capture d'écran plus haut pour les détails d'une commande._
 ![listeCommandes](https://github.com/PikminJaune/OMGliquidation/assets/71794298/887aa46f-bae6-458c-ae89-973a93cc78d3)
+
+<a href="https://4d6.1847622.techinfo-cstj.ca" targer="_blank">Tester OMGLiquidation</a>
