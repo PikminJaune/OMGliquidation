@@ -1,5 +1,5 @@
 # OMGliquidation
-Un projet web e-commerce qui a été plaisant à faire a l'école. Ce projet a été fait dans le cours de Développement Web au Cégep de Saint-Jérôme. Mon site est un site de vente d'électroménagers fictif.Toutes les images viennent du site d'Economax. Les captures d'écrans montrent une vue de compte admin , donc il ya a des fonctionnalités admin qu'un simple utilisateur ne peut pas voir. Par contre , on va pouvoir voir la base du site qu'un utilisateur régulier pourrait faire comme par exemple ajouter des items dans le panier, voir son profil , voir l'historique de ses commandes , etc. Toutes les informations qu'on voit dans le projet ( produits , comptes , commandes , etc. ) sont stockées dans une BD.
+Un projet web e-commerce qui a été plaisant à faire a l'école. Ce projet a été fait dans le cours de Développement Web au Cégep de Saint-Jérôme. Mon site est un site de vente d'électroménagers fictif.Toutes les images viennent du site d'Economax. Les captures d'écrans montrent une vue de compte admin , donc il ya a des fonctionnalités admin qu'un simple utilisateur ne peut pas voir. Par contre , on va pouvoir voir la base du site qu'un utilisateur régulier pourrait faire comme par exemple ajouter des items dans le panier, voir son profil , voir l'historique de ses commandes , etc. Toutes les informations qu'on voit dans le projet ( produits , comptes , commandes , etc. ) sont stockées dans une BD.<a href="https://4d6.1847622.techinfo-cstj.ca" targer="_blank">Tester OMGLiquidation</a>
 
 # <h1 align="center">L'accueil</h1>
 
@@ -70,5 +70,3 @@ Un admin peu modifier un nom de catégorie et/ou ajouter une nouvelle catégorie
 ![adminModifCatégorie](https://github.com/PikminJaune/OMGliquidation/assets/71794298/1ac2f39b-bbf2-4844-94e6-5cb70f7bb7cd)
 En cliquant à droite sur l'oeil , l'admin voit le détail de la commande et peu modifier l'état de celle-ci. _voir capture d'écran plus haut pour les détails d'une commande._
 ![listeCommandes](https://github.com/PikminJaune/OMGliquidation/assets/71794298/887aa46f-bae6-458c-ae89-973a93cc78d3)
-
-<a href="https://4d6.1847622.techinfo-cstj.ca" targer="_blank">Tester OMGLiquidation</a>
